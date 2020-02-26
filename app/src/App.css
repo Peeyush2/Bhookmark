@@ -1,16 +1,20 @@
 .App {
+    align-items: center;
+    justify-content: center;
     display: flex;
     flex-direction:row;
 }
 .App-header{
   background-image: linear-gradient(135deg,#9e9d95 0%, #798074 47.7%, rgba(49, 59, 49, 0.79) 100%);
   width:80vw;
+  z-index: 0;
 }
 .backphoto{
   width: 720px; 
   height: 100vh ;
   background-size: cover;
   object-position: 20% 10px;
+  z-index: 0;
   display: flex;
   
 }
