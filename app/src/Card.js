@@ -16,6 +16,15 @@ function Cards1(){
         <div className="or">
             OR
         </div>
+        <div>
+            <button>Login</button>
+        </div>
+        <div>New here? Create free account</div>
+        <div>
+            <a>Help.</a>
+            <a>Privacy.</a>
+            <a>Terms</a>
+        </div>
         </div>
     </div>
     )
