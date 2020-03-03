@@ -10,11 +10,12 @@ class Cards1 extends Component{
         this.updateEmail = this.updateEmail.bind(this);
     }
     updateEmail(e){
+        e.persist();
         console.log(e);
-        const value = e.target.email;
+       const value = e.target.value;
         console.log(value)
         this.setState({
-            email:value
+            email:e.target.value 
         })
     }
        
