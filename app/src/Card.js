@@ -7,9 +7,8 @@ class Cards1 extends Component{
             email: '',
             password: ""
         }
-        this.updateEmail = this.updateEmail.bind(this);
     }
-    updateEmail(e){
+    updateEmail=(e)=>{
         e.persist();
         console.log(e);
        const value = e.target.value;
@@ -18,7 +17,15 @@ class Cards1 extends Component{
             email:e.target.value 
         })
     }
-       
+    updatePassword=(e)=>{
+        e.persist();
+        console.log(e);
+       const value = e.target.value;
+        console.log(value)
+        this.setState({
+            password:e.target.value 
+        })
+    }
     render(){
         return(       
             <div className="outerCard">
@@ -31,7 +38,12 @@ class Cards1 extends Component{
                   placeholder= "email/mobile" 
                   value = {this.state.email}
                   onChange={this.updateEmail}/><br/>
-                  <input className="field" type= "password" placeholder="password"/>
+                  <input
+                   className="field" 
+                   value = {this.state.password}
+                   onChange = {this.updatePassword}
+                   type= "password" 
+                   placeholder="password"/>
               </div>
               <div className="forgottext">Forgot Password?</div>
               <div className="or">
