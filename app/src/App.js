@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import fire from './fire'
 import Cards1 from './Card'
 import './CSS/App.css';
 import girlphoto from './Assets/Images/woman-in-blue-striped-flannel-shirt-holding-a-book-indoors-698928.jpg'
