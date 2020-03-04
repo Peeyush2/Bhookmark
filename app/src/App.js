@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <div className="App" >
         <header className="App-header"/>
-        {this.state.attribute ?<SignUpCards/>:<Cards1/>}
+        {this.state.attribute ?<SignUpCards/>:<Cards1 />}
         <div className="backphoto" style={{backgroundImage:`url(${girlphoto})`}}/>
       </div>
     );

@@ -4,26 +4,29 @@ import SignUpCards from './SignUp'
 import './CSS/Card.css';
 class Cards1 extends Component{
     constructor(props){
+        console.log(props);
         super(props);
         this.state= {
             email: '',
-            password: ""
+            password: "",
+            colorval:"green",
+            res:null
         }
     }
     updateEmail=(e)=>{
         e.persist();
-        console.log(e);
+        //console.log(e);
        const value = e.target.value;
-        console.log(value)
+        //console.log(value)
         this.setState({
             email:e.target.value 
         })
     }
     updatePassword=(e)=>{
         e.persist();
-        console.log(e);
+        //console.log(e);
        const value = e.target.value;
-        console.log(value)
+        //console.log(value)
         this.setState({
             password:e.target.value 
         })
@@ -31,13 +34,25 @@ class Cards1 extends Component{
     LoginUser=(e)=>{
         e.persist();
         fire.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then(
-            (result)=>console.log(result)
-        )
+            (result)=>{
+                //console.log(result)
+                this.setState({
+                    res:result.message,
+                    colorval:'green'
+                })
+            }
+        ).catch(( err)=>{
+            //console.log(err)
+            this.setState({
+                res:err.message,
+                colorval : 'red'
+            })
+        })
     }
     SignUp=(e)=>{
-        e.persist();
+       // e.persist();
         return(
-            <SignUpCards/>
+            <p>hello</p>
         )
     }
     render(){
@@ -66,6 +81,7 @@ class Cards1 extends Component{
               <div>
                   <button onClick={this.LoginUser}>Login</button>
               </div>
+                <div style={{color:this.state.colorval}}>{this.state.res}</div>
               <div onClick={this.SignUp}>New here? Create free account</div>
               <div>
                   <a>Help.</a>
