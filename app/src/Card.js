@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import fire from './fire'
+import {BrowserRouter , Router ,Link, Route} from 'react-router-dom'
 import SignUpCards from './SignUp'
 import './CSS/Card.css';
 class Cards1 extends Component{
@@ -37,7 +38,7 @@ class Cards1 extends Component{
             (result)=>{
                 //console.log(result)
                 this.setState({
-                    res:result.message,
+                    res:"Succeess",
                     colorval:'green'
                 })
             }
@@ -82,7 +83,8 @@ class Cards1 extends Component{
                   <button onClick={this.LoginUser}>Login</button>
               </div>
                 <div style={{color:this.state.colorval}}>{this.state.res}</div>
-              <div onClick={this.SignUp}>New here? Create free account</div>
+              <Link to="/signUp">New here? Create free account</Link>
+              <Link to="/">Home</Link>
               <div>
                   <a>Help.</a>
                   <a>Privacy.</a>

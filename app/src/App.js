@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import fire from './fire'
 import Dashboard from './Dashboard'
 import SignUpCards from './SignUp'
+import {BrowserRouter , Router ,Link, Route} from 'react-router-dom'
 import 'firebase/auth'
 import 'firebase/firestore'
 import Cards1 from './Card'
@@ -17,11 +18,19 @@ class App extends Component {
   }
   render(){
     return (
-      <div className="App" >
-        <header className="App-header"/>
-        {this.state.attribute ?<SignUpCards/>:<Cards1 />}
-        <div className="backphoto" style={{backgroundImage:`url(${girlphoto})`}}/>
-      </div>
+      <BrowserRouter>
+            <div className="App" >
+              <header className="App-header">
+              <Link to="/">Home</Link>
+              <Link to="/signIn">Sign In</Link>
+              <Link to="/signUp">Sign Up</Link>
+              </header>
+              
+              <Route exact path ="/signIn" component={Cards1} />
+              <Route exact path ="/signUp" component={SignUpCards} />
+              <div className="backphoto" style={{backgroundImage:`url(${girlphoto})`}}/>
+            </div>
+      </BrowserRouter>
     );
   }
 }
