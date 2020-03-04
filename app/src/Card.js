@@ -1,4 +1,6 @@
 import React,{Component} from 'react';
+import fire from './fire'
+import SignUpCards from './SignUp'
 import './CSS/Card.css';
 class Cards1 extends Component{
     constructor(props){
@@ -26,6 +28,18 @@ class Cards1 extends Component{
             password:e.target.value 
         })
     }
+    LoginUser=(e)=>{
+        e.persist();
+        fire.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then(
+            (result)=>console.log(result)
+        )
+    }
+    SignUp=(e)=>{
+        e.persist();
+        return(
+            <SignUpCards/>
+        )
+    }
     render(){
         return(       
             <div className="outerCard">
@@ -50,9 +64,9 @@ class Cards1 extends Component{
                   OR
               </div>
               <div>
-                  <button>Login</button>
+                  <button onClick={this.LoginUser}>Login</button>
               </div>
-              <div>New here? Create free account</div>
+              <div onClick={this.SignUp}>New here? Create free account</div>
               <div>
                   <a>Help.</a>
                   <a>Privacy.</a>
