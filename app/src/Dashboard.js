@@ -1,5 +1,5 @@
 import React ,{COmponent, Component} from 'react'
- import './CSS/Card.css'
+import fire from './fire'
 class Dashboard extends Component{
     constructor(props){
         super(props);
@@ -10,7 +10,9 @@ class Dashboard extends Component{
     }
     render(){
         return(
-        <div className="outerCard">Peeyush</div>
+        <div className="outerCard">
+            <button onClick={fire.auth().signOut()}>Sign Out</button>
+        </div>
         )
     }
 

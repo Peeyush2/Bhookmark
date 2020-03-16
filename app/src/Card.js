@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import fire from './fire'
-import {BrowserRouter , Router ,Link, Route} from 'react-router-dom'
+import {BrowserRouter , Router ,Link, Route, Redirect} from 'react-router-dom'
 import SignUpCards from './SignUp'
 import './CSS/Card.css';
 class Cards1 extends Component{
@@ -37,10 +37,11 @@ class Cards1 extends Component{
         fire.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then(
             (result)=>{
                 //console.log(result)
-                this.setState({
-                    res:"Succeess",
+                 this.setState({
+                    res:"Success",
                     colorval:'green'
                 })
+                
             }
         ).catch(( err)=>{
             //console.log(err)

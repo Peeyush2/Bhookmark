@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import 'firebase/auth'
 var config = { /* COPY THE ACTUAL CONFIG FROM FIREBASE CONSOLE */
   apiKey: "AIzaSyCbfVBZZOIYWOExqvI5V1SwTC_7zD6vQ_s",
   authDomain: "https://light-ratio-240612.firebaseapp.com",
