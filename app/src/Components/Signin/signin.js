@@ -1,18 +1,23 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import fire from '../../fire'
 
 
 
-export default function Signin() {
+ function Signin(props) {
     const [emails,setEmail]=useState('')
     const [passwords,setPassword]=useState('')
     const [results,setResult]=useState('')
+    useEffect(()=>{
+        if(results==='Success'){
+            props.history.push('/dashboard')
+        }
+    },[results])
     function LoginUser(){
         fire.auth()
         .signInWithEmailAndPassword(emails,passwords).then(
             (result)=>{
                 console.log(result)
-                setResult(result.message)                
+                setResult('Success')                
             }
         ).catch(( err)=>{
             setResult(err.message)
@@ -20,15 +25,15 @@ export default function Signin() {
     }
     return (
         <div>
-            <input type="email" value={emails} onChange={e=>setEmail(e.target.value)}/>
-            <input type="password" value={passwords} onChange={e=>setPassword(e.target.value)}/>
-            <button onClick={()=>LoginUser()}>SignIn</button>
+            <input type="email" value={emails} placeholder='Email' onChange={e=>setEmail(e.target.value)}/><br/>
+            <input type="password" value={passwords} placeholder='Password' onChange={e=>setPassword(e.target.value)}/><br/>
+            <button onClick={()=>LoginUser()}>SignIn</button><br/>
             {results}
         </div>
     )
 }
 
-
+export default Signin
 /*
         LoginUser=(a,b)=>{
             fire.auth().signInWithEmailAndPassword(a,b).then(

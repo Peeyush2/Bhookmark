@@ -17,8 +17,9 @@ export default function People() {
    const pop= usePeople();
     return (
         <div className="People">
+            <h2>People</h2>
             { pop.map((p)=>(
-                <div key={p.data().Email}>{p.data().Name}</div>
+                    <div key={p.id}>{p.data().Name}</div>
             )
                 
             ) }
