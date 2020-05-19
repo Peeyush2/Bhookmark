@@ -7,11 +7,13 @@ import fire from '../../fire'
     const [emails,setEmail]=useState('')
     const [passwords,setPassword]=useState('')
     const [results,setResult]=useState('')
+    const [usr,setUsr]=useState('')
     useEffect(()=>{
-        if(results==='Success'){
+        fire.auth().onAuthStateChanged(setUsr)
+        if(usr){
             props.history.push('/dashboard')
         }
-    },[results])
+    },[usr])
     function LoginUser(){
         fire.auth()
         .signInWithEmailAndPassword(emails,passwords).then(

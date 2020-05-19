@@ -3,14 +3,26 @@ import fire from '../../fire'
 
 function usePeople(){
     const [people,setPeople]=useState([])
+    const [email,setEmail] = useState('')
+    const [zip,setZip]=useState('')
     useEffect(()=>{
+        setEmail(localStorage.getItem('userid')) 
         fire.firestore()
-        .collection('Users')
-        .onSnapshot((snapshot)=>{
+        .collection('Users').where('Email','==',email)
+        .get().then((snapshot)=>{
+            console.log(snapshot.docs[0].data().PinCode)
+            setZip(snapshot.docs[0].data().PinCode)
+        })
+        .then(()=>{
+            fire.firestore()
+        .collection('Users').where('PinCode','==',zip)
+        .get().then((snapshot)=>{
             //console.log(snapshot.docs)
             setPeople(snapshot.docs)
         })
-    },[])
+        })
+        .catch(e=>{console.log(e)})
+    },[email,zip])
     return people
 }
 export default function People() {

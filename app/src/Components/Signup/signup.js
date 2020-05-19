@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import fire from '../../fire'
 
 
-export default function Signup() {
+export default function Signup(props) {
     const [name,setName]=useState('')
     const [emails,setEmail]=useState('')
     const [mobileno,setMobile]=useState('')
@@ -12,7 +12,7 @@ export default function Signup() {
     const [results,setResult]=useState('')
 
     function SignupUser(){
-        if(temppass!=='' && passwords!=='' &&passwords===temppass){
+        if(name!=='' &&temppass!=='' && passwords!=='' &&passwords===temppass){
             fire.auth()
             .createUserWithEmailAndPassword(emails,passwords).then(
                 (result)=>{
@@ -25,17 +25,25 @@ export default function Signup() {
                         DOB:somedate
                     })
                 }
+            ).then(
+                props.history.push('/dashboard')
             ).catch(( err)=>{
                 setResult(err.message)
             })
         }
+        else if(name===''){
+            setResult('Name is required')
+        }
+        else if(temppass!==passwords || temppass==='' || passwords===''){
+            setResult('Please give correct password')
+        }
         else{
-            setResult('Passwords Dont match! Please check again')
+            setResult('Please check all fields properly')
         }
     }
     return (
         <div>
-            <input type="text" value={name} placeholder="name" onChange={e=>setName(e.target.value)}/><br/>
+            <input type="text" value={name} placeholder="name" onChange={(e)=>setName(e.target.value)}/><br/>
             <input type="email" value={emails} placeholder="email" onChange={e=>setEmail(e.target.value)}/><br/>
             <input type="text" value={mobileno} placeholder="Mobile No." onChange={e=>setMobile(e.target.value)}/><br/>
             <input type="date" value={dob} placeholder="Date of Birth" onChange={e=>setDob(e.target.value)}/><br/>

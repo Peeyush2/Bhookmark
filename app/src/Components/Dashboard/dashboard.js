@@ -9,9 +9,12 @@ import Library from './Library/Library'
 export default function Dashboard() {
     const[usr,setusr]=useState('')
     useEffect(()=>{
-        console.log(fire.auth().currentUser)
         fire.auth().onAuthStateChanged(setusr)
-    },[])
+        if(usr!=null)
+            localStorage.setItem('userid',usr.email)
+        else localStorage.clear()
+        //console.log(usr)
+    },[usr])
 
     if(usr){                                                                                                                                                                                                                
     return (
