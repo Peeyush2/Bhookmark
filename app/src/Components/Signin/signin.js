@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import fire from '../../fire'
-
+import './signincss.css'
+import {Typography,TextField,Card,Button, CardContent} from '@material-ui/core'
 
 
  function Signin(props) {
@@ -26,12 +27,17 @@ import fire from '../../fire'
         })
     }
     return (
-        <div>
-            <input type="email" value={emails} placeholder='Email' onChange={e=>setEmail(e.target.value)}/><br/>
-            <input type="password" value={passwords} placeholder='Password' onChange={e=>setPassword(e.target.value)}/><br/>
-            <button onClick={()=>LoginUser()}>SignIn</button><br/>
-            {results}
-        </div>
+        <Card className="signinblock" style={{alignItems:'center'}}>
+            <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">SignIn</Typography>
+            <TextField id="outlined-basic" label="Email" variant="outlined" className='block' type="email" value={emails} placeholder='Email' onChange={e=>setEmail(e.target.value)}/><p></p>
+            <TextField id="outlined-basic" label="Password" variant="outlined" className='block' type="password" value={passwords} placeholder='Password' onChange={e=>setPassword(e.target.value)}/><p></p>
+            <Button variant='outlined' color='primary'align='center' onClick={()=>LoginUser()}>Sign IN</Button><br/>
+            <p></p>
+            <Typography>{results}</Typography><p></p>
+            </CardContent>
+        </Card>
+
     )
 }
 
