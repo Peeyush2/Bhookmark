@@ -1,0 +1,82 @@
+.signin-background1{
+    width: 65%;   
+    height: 100vh;
+    display: flex;
+    background: linear-gradient(#9e9d95 0%, #798074 47.7%, rgba(49,59,49,0.79) 100%);
+}
+
+.signin-background2{
+    width: 35%;   
+    height: 100vh;
+    display: flex;
+    background-image: url(./woment.jpg);
+    background-position: 0px -85px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    
+}
+
+.signin-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: relative;
+
+}
+
+.signin-block{
+    position:absolute;
+    width:500px;
+    height: 410px;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    margin: auto;
+    background:linear-gradient(#dbeee9 0%, #e9e9e9 100%);
+    border-radius: 4px;
+    padding:15px ;
+    display: flex;
+    justify-content: center;
+}
+
+.signin-content{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+}
+.block-heading{
+    color: #5d8980;
+    display: flex;
+    justify-content: center;
+}
+.email-input{
+    background: #c4e6dd;
+    border: none;
+    padding : 15px;
+    font-size: 20px;
+    margin: 5px;
+    outline: none;
+}
+.email-input:focus{
+    
+}
+.login-button{
+    background:#1c6a54;
+    color: #e8e9e9;
+    border: none;
+    width: fit-content;
+    border-radius: 5px;
+    padding:5px 17px;
+
+}
+.login-button:focus{
+    border: none;
+    outline: none;
+}
+
+.nav-logo{
+    margin: auto;
+    position: absolute;
+    left: 20px;
+}

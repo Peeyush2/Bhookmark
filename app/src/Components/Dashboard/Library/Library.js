@@ -100,8 +100,9 @@ export default function Library() {
                     alert('you already have requested for this book')
                 }
                 }
-                ).catch(e=>console.log(e))}
-                }
+                ).catch(e=>console.log(e))
+            }
+        }
 
     function boolcheck(bookdata){
         if(bookdata.data().current_user===curr_user){
@@ -110,12 +111,7 @@ export default function Library() {
         else return false
     }
 
-    function boolcheck2(bookdata){
-        if(bookdata.data().current_user===curr_user){
-            return false
-        }
-        else return true
-    }
+
 
 
     return (
@@ -124,7 +120,7 @@ export default function Library() {
             {lib.map((d)=>(
              !d.data().in_shelf &&  <li key={d.id}>{d.data().Name}
                 {boolcheck(d) && <Button  onClick={()=>handleClick(d)}>Return Book to shelf</Button>}
-                {boolcheck2(d) && <Button  onClick={()=>handleBorrow(d)}>Borrow</Button>}
+                {!boolcheck(d) && <Button  onClick={()=>handleBorrow(d)}>Borrow</Button>}
              </li>
             ))}
         </div>

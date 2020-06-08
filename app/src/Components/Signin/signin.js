@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import fire from '../../fire'
 import './signincss.css'
-import {Typography,TextField,Card,Button, CardContent} from '@material-ui/core'
+//import {Typography,TextField,Card,Button, CardContent} from '@material-ui/core'
+import girlimg from './woment.jpg'
+import { motion } from 'framer-motion'
 
 
  function Signin(props) {
@@ -26,39 +28,65 @@ import {Typography,TextField,Card,Button, CardContent} from '@material-ui/core'
             setResult(err.message)
         })
     }
+    function gotosignup(){
+        props.history.push('/signup')
+    }
     return (
-        <Card className="signinblock" style={{alignItems:'center'}}>
-            <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">SignIn</Typography>
-            <TextField id="outlined-basic" label="Email" variant="outlined" className='block' type="email" value={emails} placeholder='Email' onChange={e=>setEmail(e.target.value)}/><p></p>
-            <TextField id="outlined-basic" label="Password" variant="outlined" className='block' type="password" value={passwords} placeholder='Password' onChange={e=>setPassword(e.target.value)}/><p></p>
-            <Button variant='outlined' color='primary'align='center' onClick={()=>LoginUser()}>Sign IN</Button><br/>
-            <p></p>
-            <Typography>{results}</Typography><p></p>
-            </CardContent>
-        </Card>
+        <div className='signin-container'>
+            <div className = "signin-background1"></div>
+            <div className = "signin-background2"></div>
+            <motion.div className="signin-block" 
+                initial={{y:'-100vw'}}
+                animate={{y:0}}
+            >
+                <div className='signin-content'>
+                <div className='block-heading'><h2>Login</h2></div>
+                <input
+                    className='email-input' 
+                    label="Email"   
+                    type="email" 
+                    value={emails} 
+                    placeholder='Email' 
+                    onChange={e=>setEmail(e.target.value)}
+                    onKeyPress={event=>{
+                        if(event.key==='Enter'){
+                            LoginUser()
+                        }
+                    }}
+                />
+                <p></p>
+                <input 
+                    className='email-input'  
+                    label="Password"   
+                    type="password" 
+                    value={passwords} 
+                    placeholder='Password' 
+                    onChange={e=>setPassword(e.target.value)}
+                    onKeyPress={event=>{
+                        if(event.key==='Enter'){
+                            LoginUser()
+                        }
+                    }}
+                    />
+                    <p></p>
+                <div style={{display:'flex',justifyContent:'center'}}>
+                <button className='login-button' onClick={()=>LoginUser()}>Login</button><br/>
+                </div>
+                <p></p>
+                {results && <motion.div style={{display:'flex',justifyContent:'center'}}
+                 initial={{x:'-100vw'}}
+                 animate={{x:0}}
+                >
+                <span style={{color:'red'}}>{results}</span><p></p>
+                </motion.div>}
+                <div style={{display:'flex',justifyContent:'center'}}>
+                <span onClick={()=>gotosignup() }style={{cursor:'pointer'}}>New Here? Create free account now!!</span><p></p>
+                </div>
+                </div>
+            </motion.div>
+        </div>
 
     )
 }
 
 export default Signin
-/*
-        LoginUser=(a,b)=>{
-            fire.auth().signInWithEmailAndPassword(a,b).then(
-                (result)=>{
-                    console.log(result)
-                     this.setState({
-                        res:"Success",
-                        colorval:'green'
-                    })
-                    
-                }
-            ).catch(( err)=>{
-                console.log(err)
-                this.setState({
-                    res:err.message,
-                    colorval : 'red'
-                })
-            })
-        }
-*/

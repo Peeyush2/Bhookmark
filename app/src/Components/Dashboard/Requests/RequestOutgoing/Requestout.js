@@ -11,16 +11,8 @@ export default function Requestout() {
         if(usr){
             fire.firestore().collection('Requested').doc(usr).get().then(
                 (snap)=>{
-                    var request = []
-                    if(!snap.exists){
-                        fire.firestore().collection('Requested').doc(usr).set({
-                            request
-                        })
-                    }
-                    else{
                         setRequest(snap.data())
                         //console.log(snap.data())
-                    }
                 }
             ).catch((e)=>{
                 console.log(e)

@@ -11,6 +11,7 @@ import './App.css';
 import Dashboard from '../Dashboard/dashboard'
 import requestIncoming from '../Dashboard/Requests/RequestIncoming/requestIncoming';
 import ShowBook from '../Dashboard/Requests/RequestIncoming/ShowBook';
+import NavBar from './../Dashboard/NavBar/NavBar'
 
 function App(){
     return (
