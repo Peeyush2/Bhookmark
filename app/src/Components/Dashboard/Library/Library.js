@@ -1,19 +1,19 @@
 import React,{useState,useEffect} from 'react'
 import fire from '../../../fire'
 import './Library.css'
+import ImgMediaCard from './../../Card/card'
 import {Button, Checkbox} from '@material-ui/core'
 
 
 export default function Library() {
-    //const lib = useLibrary();    
     const [lib,setlib] = useState([])
     const [curr_user,setCurr_user]=useState('')
+
     useEffect(()=>{
         setCurr_user(localStorage.getItem('userid'))
     })
     useEffect(()=>{
-        fire.firestore().collection('Books')
-        .get().then(
+        fire.firestore().collection('Books').get().then(
             (snapshot)=>{
                 setlib(snapshot.docs)
                 //console.log(snapshot.docs[0].data())
@@ -98,12 +98,14 @@ export default function Library() {
     return (
         <div className='Library-container'>
           <h2 className='Library-heading'>Library</h2>
+          <div >
             {lib.map((d)=>(
-             !d.data().in_shelf &&  <div key={d.id}>{d.data().Name}
+             !d.data().in_shelf &&  <div key={d.id} className="each-crd"><ImgMediaCard props={d.data()}/>
                 {boolcheck(d) && <Button  onClick={()=>handleClick(d)}>Return Book to shelf</Button>}
                 {!boolcheck(d) && <Button  onClick={()=>handleBorrow(d)}>Borrow</Button>}
              </div>
             ))}
+            </div>
         </div>
     )
 }

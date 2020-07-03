@@ -1,14 +1,17 @@
 import React,{useState,useEffect} from 'react'
-import Peopleincircle from './People'
+//import Peopleincircle from './People'
 import fire from '../../fire'
 import NavBar from './NavBar/NavBar'
 import Library from './Library/Library'
 import YourBooks from './Your Books/YourBooks'
-import Map from '../Dashboard/Map/Map'
+import RequestIncoming from './Requests/RequestIncoming/requestIncoming'
+import RequestOut from './Requests/RequestOutgoing/Requestout'
+//import Map from '../Dashboard/Map/Map'
 //import {Redirect} from 'react-router-dom'
 //import Signin from '../Signin/signin'
 import Book from './Books/Book'
-import {Button, Divider} from '@material-ui/core'
+//import {Button, Divider} from '@material-ui/core'
+
 import './dashboard.css'
 
 export default function Dashboard() {
@@ -61,33 +64,25 @@ export default function Dashboard() {
     if(usr){                                                                                                                                                                                                                
     return (
         <div className='dashboard-container' style={{background:'linear-gradient(#dbeee9 0%, #e9e9e9 100%)'}}>
-                 <NavBar/>
-        <div className='dash-container'>
-        <>{usr.email}</>
-             {/* <Peopleincircle />
-            
-            { <div className='library-container'>
-                <Library/>
-            </div> }/*
-            { <div className='yourbook-container'>
-                <YourBooks/>
-            </div> }
-            { <Map/> }
-            { {usr.email} }
-            { <div className='book-container'>
-                <Book/>
-            </div> } */}
-            <div className="dashboardList">
-                    <ol className="libList" onClick={()=>setTab('Library')}>Library</ol>
-                    <ol onClick={()=>setTab('BookShelf')}>My BookShelf</ol>
-                    <ol onClick={()=>setTab('Request')}>My Requests</ol>    
-            </div>
-            <div >
-                
-            {(tab==='Library') && <Library/>}
-            {(tab==='BookShelf') &&<YourBooks/>}
-            {(tab==='Request') &&<Book/>}
-            </div>
+             <NavBar/>
+            <div className='dash-container'>
+                <div>
+                    {usr.email}
+                </div>
+                <div className="dashboardList">
+                        <ol className="libList" onClick={()=>setTab('Library')}>Library</ol>
+                        <ol onClick={()=>setTab('BookShelf')}>My BookShelf</ol>
+                        <ol onClick={()=>setTab('RequestIn')}>Requests Incomming</ol> 
+                        <ol onClick={()=>setTab('RequestOut')}>Requests Made by you</ol>   
+                        <ol onClick={()=>setTab('addBook')}>Add Book</ol>   
+                </div>
+                <div >    
+                    {(tab==='Library') && <Library/> }
+                    {(tab==='BookShelf') &&<YourBooks/>}
+                    {(tab==='RequestIn') &&<RequestIncoming/>}
+                    {(tab==='RequestOut') &&<RequestOut/>}
+                    {(tab==='addBook') &&<Book/>}
+                </div>
             </div>
         </div>
     )  

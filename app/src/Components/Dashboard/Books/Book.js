@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import fire from '../../../fire'
 import {Button,input} from '@material-ui/core'
+
+
 export default function Book(props) {
 const [book,setbook] = useState('')
 const [result,setResult]=useState([])
@@ -21,7 +23,9 @@ function bookhandle(){
 function addbookcall(st){
     if(window.confirm('You want to add this book?')){
         fire.firestore().collection('Books').add({
-            Name:st,
+            Name:st.title,
+            imagelink:st.imageLinks.smallThumbnail,
+            otherdata:st,
             original_user:localStorage.getItem('userid'),
             current_user:localStorage.getItem('userid'),
             in_shelf:true
@@ -36,10 +40,12 @@ function addbookcall(st){
             <Button onClick={()=>{setIdx(0);bookhandle()}}>Search Book</Button><br/>
             <br/>
              {result && result.map((res)=>(
-                 <li style={{border:'solid'}} key = {res.id} onClick={()=>{addbookcall(res.volumeInfo.title)}}><br/>
+                 <li style={{border:'solid'}} key = {res.id} onClick={()=>{addbookcall(res.volumeInfo)}}>
+                     {console.log(res)}
+                     <br/>
                      {res.volumeInfo.imageLinks && <img src={res.volumeInfo.imageLinks.smallThumbnail}/>}
                      <h3 >{res.volumeInfo.title}</h3>
-             <p>{res.volumeInfo.authors && res.volumeInfo.authors.map((val)=>(<span key={val}>{val}{', '}</span>))}</p>
+                    <p>{res.volumeInfo.authors && res.volumeInfo.authors.map((val)=>(<span key={val}>{val}{', '}</span>))}</p>
                  </li>
              ))}
              {vis && <div>

@@ -1,75 +1,47 @@
-import React, { Component } from 'react'
-import './Card.css'
-import {Link} from 'react-router-dom'
-class Card extends Component{
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-    //update constructor 
-    constructor(props){
-        super(props)
-        this.state={
-            email:"",
-            password:""
-        }
-    }
-    
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 196,
+    maxHeight:315,
+    minHeight:315,
+    minWidth:196
+  },
+});
 
-    //update email and phone
-    updateEmail=(e)=>{
-        e.persist();
-       //const value = e.target.value;
-        this.setState({
-            email:e.target.value 
-        })
-    }
+export default function ImgMediaCard(props) {
+  const classes = useStyles();
+  function checkimg(otherdata){
+      if(otherdata===undefined){
+        return null
+      }
+      return otherdata.imageLinks.thumbnail;
 
-    //update password
-    updatePassword=(e)=>{
-        e.persist();
-       //const value = e.target.value;
-        this.setState({
-            password:e.target.value 
-        })
-    }
-
-    render(){ 
-        return(
-        <div className="outerCard">
-        <div className="Card">
-    <div className="logintext">{this.props.logintext}</div>
-    <div className="entertext">Enter your details to {this.props.logintext}</div>
-        <div className="fields">
-          <input 
-          className="field"
-          placeholder= "Email/Mobile" 
-          value = {this.state.email}
-          onChange={this.updateEmail}/>
-          <br/>
-          <input
-           className="field" 
-           value = {this.state.password}
-           onChange = {this.updatePassword}
-           type= "password"
-           placeholder="Password"/>
-      </div>
-        <div className="forgottext">{this.props.forgottext}</div>
-      <div>
-        <button onClick={()=>this.props.loginfun(this.state.email,this.state.password)}>{this.props.logintext}</button>
-      </div>
-        <div>{this.props.res}</div>
-      <div className="or">
-          OR
-      </div>
-        <div style={{color:this.state.colorval}}>{this.state.error}</div>
-    <Link to={this.props.otherpagelink}>{this.props.otherpage}</Link>
-      <div>
-          <a href="#">Help.</a>
-          <a href="#">Privacy.</a>
-          <a href="#">Terms</a>
-      </div>
-      </div>
-  </div>
-    )
+  }
+  return (
+    <Card className="each-card" className={classes.root}>{console.log(props.props)}
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          alt={props.props.Name}
+          height="140"
+          image={checkimg(props.props.otherdata)}
+          title={props.props.Name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {props.props.Name}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
 }
-}
-
-export default Card
