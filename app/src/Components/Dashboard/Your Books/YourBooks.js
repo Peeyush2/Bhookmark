@@ -34,7 +34,7 @@ export default function YourBooks() {
     }
     return (
         <div>
-            <h2>Books in Your Shelf</h2>
+            <h2 className='Library-heading'>Books in Your Shelf</h2>
             {book.map((b)=>(
                 b.data().in_shelf && <li>{b.data().Name} <Button onClick={()=>handleclick(b)}>Add to Library</Button></li>
             ))}

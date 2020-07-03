@@ -14,6 +14,7 @@ import './dashboard.css'
 export default function Dashboard() {
     const[usr,setusr]=useState('')
     const [update1,setUpdate1] = useState(false)
+    const [tab, setTab] = useState('Library')
     useEffect(()=>{
         fire.auth().onAuthStateChanged(setusr)
         if(usr!='' && usr!=null){
@@ -24,11 +25,11 @@ export default function Dashboard() {
         else localStorage.clear()
     },[usr])
     useEffect(()=>{
-        if(usr.email){
+        if(usr!='' && usr!=null){
             fire.firestore().collection('Requests').doc(usr.email).get().then(
                 (snap)=>{
                     if(!snap.exists){
-                        const Request = []
+                        const Request = [{dummy:'dummy-data'}]
                         fire.firestore().collection('Requests').doc(usr.email).set(
                            { Request}
                         )
@@ -41,11 +42,11 @@ export default function Dashboard() {
         }
     },[usr])
     useEffect(()=>{
-        if(usr.email){
+        if(usr!='' && usr!=null){
             fire.firestore().collection('Requested').doc(usr.email).get().then(
                 (snap)=>{
                     if(!snap.exists){
-                        const Request = []
+                        const Request = [{dummy:'dummy-data'}]
                         fire.firestore().collection('Requested').doc(usr.email).set(
                            { Request}
                         )
@@ -61,7 +62,8 @@ export default function Dashboard() {
     return (
         <div className='dashboard-container' style={{background:'linear-gradient(#dbeee9 0%, #e9e9e9 100%)'}}>
                  <NavBar/>
-          {/* <h2>  You are logged in via  {usr.email}</h2> */}
+        <div className='dash-container'>
+        <>{usr.email}</>
              {/* <Peopleincircle />
             
             { <div className='library-container'>
@@ -75,8 +77,17 @@ export default function Dashboard() {
             { <div className='book-container'>
                 <Book/>
             </div> } */}
-            <div className='signout-container'>
-               
+            <div className="dashboardList">
+                    <ol className="libList" onClick={()=>setTab('Library')}>Library</ol>
+                    <ol onClick={()=>setTab('BookShelf')}>My BookShelf</ol>
+                    <ol onClick={()=>setTab('Request')}>My Requests</ol>    
+            </div>
+            <div >
+                
+            {(tab==='Library') && <Library/>}
+            {(tab==='BookShelf') &&<YourBooks/>}
+            {(tab==='Request') &&<Book/>}
+            </div>
             </div>
         </div>
     )  
